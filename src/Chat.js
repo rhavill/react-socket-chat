@@ -21,7 +21,8 @@ var Chat = React.createClass({
   handleChange: function(event) {
     this.setState({message: event.target.value});
   },
-  handleClick: function(event) {
+  handleSubmit: function(event) {
+    event.preventDefault();
     socket.emit('chat message', this.state.message);
     this.setState({message: ''});
   },
@@ -34,16 +35,19 @@ var Chat = React.createClass({
          })}
         </ul>
         <div className="input-container">
-          <input
-            type="text"
-            value={this.state.message}
-            onChange={this.handleChange}
-          />
-          <button
-            onClick={this.handleClick}
-          >
-            Send
-          </button>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              value={this.state.message}
+              onChange={this.handleChange}
+              className="text-input"
+            />
+            <input
+              type="submit"
+              value="Send"
+              className="submit"
+            />
+          </form>
         </div>
       </div>
     );

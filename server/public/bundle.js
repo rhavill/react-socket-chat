@@ -21115,7 +21115,8 @@
 	  handleChange: function handleChange(event) {
 	    this.setState({ message: event.target.value });
 	  },
-	  handleClick: function handleClick(event) {
+	  handleSubmit: function handleSubmit(event) {
+	    event.preventDefault();
 	    socket.emit('chat message', this.state.message);
 	    this.setState({ message: '' });
 	  },
@@ -21138,17 +21139,20 @@
 	      React.createElement(
 	        'div',
 	        { className: 'input-container' },
-	        React.createElement('input', {
-	          type: 'text',
-	          value: this.state.message,
-	          onChange: this.handleChange
-	        }),
 	        React.createElement(
-	          'button',
-	          {
-	            onClick: this.handleClick
-	          },
-	          'Send'
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          React.createElement('input', {
+	            type: 'text',
+	            value: this.state.message,
+	            onChange: this.handleChange,
+	            className: 'text-input'
+	          }),
+	          React.createElement('input', {
+	            type: 'submit',
+	            value: 'Send',
+	            className: 'submit'
+	          })
 	        )
 	      )
 	    );
