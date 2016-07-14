@@ -10,6 +10,7 @@ npm install
 
 ## Running the Server
 ```
+cd server
 node server.js
 ```
 
